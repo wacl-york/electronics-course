@@ -1,0 +1,273 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage[a4paper, total={6.8in, 9.8in}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{gensymb}
+
+\usepackage{todonotes}
+\usepackage{glossaries}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{WACL Electronics Course}
+\fancyfoot[R]{\thepage}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\setlength{\parindent}{0pt}
+
+% Title Page
+\title{WACL Electronics Course}
+\author{William Burbidge}
+
+
+% Create the command used for questions
+\newcommand{\Theory}[1] % This is what you will use to create a new question
+{
+% \par\noindent % Creates a new unindented paragraph
+\phantomsection % Needed for hyperref compatibility with the \addcontensline command
+\todo[inline, color=green!30]{\textbf{#1}} % Uses the todonotes package to create a fancy box to put the question
+\vspace{1em} % White space after the question before the start of the answer
+}
+
+% Create the command used for questions
+\newcommand{\Examples}[1] % This is what you will use to create a new question
+{
+\par\noindent % Creates a new unindented paragraph
+\phantomsection % Needed for hyperref compatibility with the \addcontensline command
+\todo[inline, color=red!30]{\textbf{#1}} % Uses the todonotes package to create a fancy box to put the question
+\vspace{1em} % White space after the question before the start of the answer
+}
+
+% Create the command used for questions
+\newcommand{\Simulation}[1] % This is what you will use to create a new question
+{
+\par\noindent % Creates a new unindented paragraph
+\phantomsection % Needed for hyperref compatibility with the \addcontensline command
+\todo[inline, color=yellow!30]{\textbf{#1}} % Uses the todonotes package to create a fancy box to put the question
+\vspace{1em} % White space after the question before the start of the answer
+}
+
+% Create the command used for questions
+\newcommand{\Quiz}[1] % This is what you will use to create a new question
+{
+\par\noindent % Creates a new unindented paragraph
+\phantomsection % Needed for hyperref compatibility with the \addcontensline command
+\todo[inline, color=blue!30]{\textbf{#1}} % Uses the todonotes package to create a fancy box to put the question
+\vspace{1em} % White space after the question before the start of the answer
+}
+
+\makeglossaries
+
+\newglossaryentry{latex}
+{
+    name=This is a test,
+    description={Is a markup language specially suited
+    for scientific documents}
+}
+
+\newglossaryentry{game}
+{
+    name=This is a test,
+    description={Is a markup language specially suited
+    for scientific documents}
+}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+% \begin{singlespace} \end{singlespace} may be needed for example in bibleography%
+
+\section{Electronics basics}
+
+Understanding of the electronics behind processes or sensors used in the field can really help within research. Whether this is in the repair of equipment, design of a system to automate data measurement, or to help understand why read data is significantly different than expected.
+This course will try to take you through the basics, and try to link it to examples important for Chemistry related research. By the end of the course, you should have an understanding of basic electronics theory and practice, an understanding of terminology, and should be able to build a basic system using a sensor and control loop.
+There will be opportunity to learn theory, see how this relates to practice, with some specific Chemistry examples, and chance to use and view simulation to help to solidify knowledge. Then as your confidence grows, you will get opportunity to put this learning into practice.
+
+We will start with the basics of electronics. There are a range of ways in which it can be represented, but starting with the physics can be helpful.
+
+Electronics involves a flow of electrons, for a transfer of energy over time (power). This is both represented through voltage and current. If this was to be represented as "packets" or letters in a mail network, voltage is the magnitude/ energy provided to packets where current is the rate at which they are delivered. A component or drop off point along the network will have a resistance, which is the number of parcels they will pick up from each mailperson.
+
+Regarding physics, electronics works through the transfer of electrical energy, which goes through a conversion process in components. A resistance will cause a heat conversion/ heatloss, where a capacitance and inductance which will be discussed in further detail later is due to a conversion to electric potential and magnetic potential.
+
+Focusing just on resistance for now, this can be represented as several key physics equations, important for physics based electronic theory and practice.
+
+\[V=IR , P=IV , P=I^2R , P=E/T\]
+
+As can be seen, $P=I^2R$ can be derived by rearranging and putting $V=IR$ into $P=IV$.
+
+Voltage is represented with V, with the unit volt. Current is represented with I, with the unit Amp. Resistance is represented with R, with the unit Ohm (with the greek letter $\ohm$). Power is represented with P, with the unit Watt. Time is represented with T and is usally in seconds.
+
+Now the basics have been covered a small quiz might be helpful to consolidate knowledge.
+
+\Quiz{Quiz}
+
+1. What does resistance demonstrate?
+
+a) The rate of flow of electrons.
+
+b) The energy in each "packet" or electron.
+
+c) Conversion of electrical to thermal energy/ heat.
+
+2. Demonstrate how you would go from $P=I^2R$ to $P=IV$.
+
+You can wire a circuit with parallel and series elements. A series circuit has a single loop, with components connected one after another, sharing a single voltage. A parallel circuit can have more than one loop branching out, with each loop having a voltage equivalent to the input, and the current will be split between them, based on their resistance.
+
+\subsection{Resistors}
+
+\Theory{What are Resistors?}
+
+Now that the basics have started to be discussed, it would be important to look at resistors.
+
+Resistors are components which are rated to have a specific resistance. Therefore depending on the circuit, there will be varying levels of losses seen from them. They can be quite important components to use when a part needs a specific voltage close to that of the source/ input, or as a way of limiting current flow.
+
+Below is a basic circuit, with wires, a resistor and a battery, to demonstrate V=IR.
+
+https://tinyurl.com/27gj49kj
+
+In the specific example, we have a resistor of 1 Ohms and a voltage of 5V. Therefore, using $V=IR$, we can rearrange to find a current of $I = 5/1 = 5A$. This can then be used to find a power of $P = IV = 5*5 = 25W$. Each of these discussed can be seen on the simulation. Feel free to play around with it and alter values. Instructions in use of the simulation program can be found (here).
+
+\Examples{Example circuits etc}
+
+As this is early on, there aren't too many example circuits just using the above knowledge alone. One example though would be if a project required use of a heater. Given that you know the input voltage that you have avaliable, and the required thermal load, you can calculate the resistance of the heating element that you require.
+
+\section{Electronics test equipment}
+
+There are a range of pieces of equipment that can aide you with electronics, which some may seem overwhelming at first. But understanding what they do, and why/ if they are needed are important!
+
+A very common piece of equipment is a multimeter. These are used to measure current, voltage and resistance. When measuring current, the multimeter needs to be connected in series with what you are attempting to measure, where to measure voltage or resistance, you place the probes in series with the component or circuit segment you are looking to measure.
+
+A more complex piece of equipment which you may or may not use is an oscilloscope, which is again for measuring voltage and current, but comparing this against time, so graphs can be viewed/ produced using them. The software sometimes used within this course Falstad, uses scopes, which are a representation of what you would view through an oscilloscope probing a specific component or element of the circuit. It can be particularly helpful to check if the circuit is working as intended, or as an easier way to troubleshoot.
+
+\section{Necessary software}
+
+Throughout this document, you are encouraged to check simulations through Falstad. Falstad is a web-based, simple to use but relatively powerful circuit simulation program. It was designed orginially by Paul Falstad and is completely free to use.
+
+It has been selected due to its ease of use, and ability to represent information about the circuit in a clear and helpful way.
+
+LabVIEW will be required for the practical element of this course. LabVIEW is a graphical programming plaform, specifically intended for Test and Measurement, so was selected as a suitable program for testing out the skills developed through this course. This will need to be installed, using the Universities licence, which the steps can be found through the following resource- \href{https://www.york.ac.uk/it-services/software/a-z/labview/#tab-2}{Link}
+
+\section{Electronics safety}
+
+Safety is something that is a key consideration when doing anything with electronics. If you are unsure, it is always best to ask rather than to assume.
+
+As has been discussed beforehand, current can be related to voltage and resistance through $V=IR$. The body has a resistance which can vary depending on length etc, but is relatively high. Therefore, as voltage increases, so will current if the resistance stays the same. It is always good practice to take caution when using electronics, but especially when dealing with higher voltages, as it can be fatal. It is likely that the voltages used for the in person practical elements will be low voltages.
+
+Something that might not be initially considered is ratings of components. This is something that is very important, to ensure that a selected part can take the expected power loss without damage. Therefore it is important when selecting a resistor to calculate its estimated power drop, and select a resistor with a power rating clearly above the max predicted power losses. It is important to add a safety buffer, as circuits in reality are not ideal, so may react slightly different than expected, such as a component having a resistance value that differers from its value.
+Regarding differing values, a tolerence can be found, which is the percentage at which a value can differ. This is usually under 20\% (it can be considerably smaller). If you are unsure, it is better though to add a safety buffer, x2 the calculated value is fairly common, as it helps to account for how the tolerences of other components affect that one.
+
+It is important to consider that all components have losses, including wire, so this needs to be considered, with a wire or connector of suitable ratings selected. With this waste heat, also comes a voltage drop, which may also be a factor, as if high enough, can cause issues with the circuit itself.
+
+You should be careful when handeling components, as built up static can cause damage. Grounding yourself, such as touching a metal surface can help to reduce this static potential.
+
+Soldering may be something that is required for a project. There are health risks associated with all forms of soldering, so it is best to solder in a well ventilated area with the suitable equipment. If possible, although slightly harder to work with, it would be recommended to use lead free solder, reducing health risks and allowing for safer use in the field. Within solder, there is flux which helps solder to flow better, but the evaporation of this produces a vapour which can be harmful if inhaled. Many soldering iron setups have extraction next to the iron, to minimize this chance of inhaling it.
+
+\section{Component footprints}
+
+It is important to be aware of the fact that components can be sourced in a range of footprints, which may be necessary to look into for electronics design or repair. Imperial measurement is most commonly used for surface mount resistors, capacitors and inductors, with values associated with mils, which represent 1000th of an inch. In many cases surface mount components will be used with commercial products, so use of one may be required in replacement of a faulty part. Understanding their size, and your ability to solder them is important, and it is often a challenge that people follow to trial their ability. You may be able to access a soldering oven, which can help make this process easier, considering that as solder melts, it can somewhat help to pull a component into place, if it is minorly offcentered.
+
+\section{Further reading}
+
+This section is here to provide some further reading into more advance topics. Although you may not need to make a circuit using the below, understanding of them may come in beneficial. Some of the below circuits also will help to solidify your understanding of the key components mentioned above.
+
+\subsection{Rectification}
+
+\Theory{What is Rectification?}
+
+Rectification is the process of converting AC to DC, commonly used in power supplies, such as a phone or laptop charger. This is very important due to digital electronics requiring DC to function. Although repair/ diagnosis of AC circuitry should not be undertaken without the necessary training, understanding of how AC circuits function is important for safety and to better understand the use of different components.
+
+\textit{This circuit uses components which have already been discussed earlier in this document, so for further explanation refer back to the appropriate sections.}
+
+For this AC-DC conversion, the alternating current needs to be converted to flow in just one direction. Therefore a key component in this process is a diode (This will provide a hyperlink to the diode section).
+
+The most basic form of circuitry is a half-bridge (otherwise known as half-wave) rectifier. This uses a single diode in series with the load, to only allow current flow in one path. Therefore, the output wave will be only the positive side of the sinusiodal wave, meaning that the average voltage seen at the output would be around half of the RMS voltage, although in a form likely unsuitable for most DC circuits.
+
+\vspace*{1\baselineskip}
+
+\includegraphics[width=0.5\textwidth]{halfbridge}
+\includegraphics[width=0.5\textwidth]{halfbridgewave}
+
+\vspace*{1\baselineskip}
+
+A half-bridge circuit can be improved through use of filtering, with the addition of a capacitor to smooth the output voltage. This capacitor is added in parallel, where it is charged by the voltage, which it will then output this when the output drops below its own voltage. This means that the output voltage can get closer to being a smooth DC voltage. As previously mentioned, even if perfectly smoothed, the max voltage that could be attained is half the RMS voltage.
+
+\vspace*{1\baselineskip}
+
+\includegraphics[width=0.5\textwidth]{halfbridgesmoothed}
+\includegraphics[width=0.5\textwidth]{halfbridgewavesmoothed}
+
+\vspace*{1\baselineskip}
+
+The next step to improve a half-bridge circuit is to make it a full-bridge rectification circuit, which utilises four diodes, meaning that whichever way the current flows at the input of the rectifier, it will be fixed at the output. Therefore there will be a sinusiodal voltage magnitude but only in the positive axis. This can again be smoothed with a capacitor, and if perfectly smoothed, can have a fixed output closely following the RMS voltage.
+
+\vspace*{1\baselineskip}
+
+\includegraphics[width=0.5\textwidth]{fullbridge}
+\includegraphics[width=0.5\textwidth]{fullbridgewave}
+
+\vspace*{1\baselineskip}
+
+\includegraphics[width=0.5\textwidth]{fullbridgesmoothed}
+\includegraphics[width=0.5\textwidth]{fullbridgewavesmoothed}
+
+
+\Examples{Example circuits, applications and considerations}
+
+This section will quickly look at applications of the above mentioned circuits.
+
+Rectification circuits are used a considerable amount, especially for AC-DC power supplies, as an initial stage to convert AC to DC. Due to this, their main usage is within power supplies connected to the mains. Other applications though could include a dynamo torch, where the AC power generated from the motor needs rectification to suitably power an LED.
+
+It is likely that in the majority of cases a full-bridge rectifier would be used rather than a half-bridge rectifier, unless initial costs were a major consideration.
+
+Due to varience in the manufacturing process, even within a single product, it is commonly considered best practice to use a full-bridge diode package, where there are four equal diodes within one part.
+
+Rectifiers are generally used as part of a more complex power system, usually as an earlier on stage.
+
+\Simulation{Simulations}
+
+Below are several Simulations to have a play around with to help your understanding of Rectification.
+
+Half-Bridge rectifier at 230V RMS, 50Hz- \href{https://tinyurl.com/24lw5qjj}{Link}
+
+Half-Bridge rectifier at 230V RMS, 50hz with capacitive smoothing- \href{https://tinyurl.com/27lb3k8o}{Link}
+
+Full-bridge rectifier at 230V RMS, 50Hz without smoothing- \href{https://tinyurl.com/224uqhfw}{Link}
+
+Full-bridge rectifier at 230V RMS, 50Hz with capacitive smoothing- \href{https://tinyurl.com/2yeg4kof}{Link}
+
+\Quiz{Quiz}
+
+1. What is the main benefit of a full-bridge rectifier over a half-bridge rectifier.
+
+a) It is cheaper to build.
+
+b) It allows for full utilisation of the input voltage.
+
+c) It uses less components.
+
+2. Why are smoothing capacitors useful? (There may be more than one right answer)
+
+a) They allow for a more constant output voltage.
+
+b) They increase average power output.
+
+c) They reduce output ripple.
+
+3. True or False, it is known to be better to use several diodes individually rather than packaged together as a full bridge rectifier package.
+
+4. True or False, rectifiers can be used to also convert DC to AC.
+
+
+Challenge- Using Falstad or hand drawn, design a full-bridge rectifier with voltage variance/ ripple lower than 10\%, working with an AC voltage of a peak value of 326V, at 50Hz.
+
+%\clearpage
+
+%\printglossary
+
+\end{document}
