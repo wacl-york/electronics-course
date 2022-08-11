@@ -761,7 +761,7 @@ The course touches on other useful areas to be aware of when dealing with electr
 
 \section{Electronics Fundamentals}
 
-Electronics involves a flow of electrons, for a transfer of energy over time (i.e. power). We represent this through \gls{vltg} and \gls{crnt}, seen as key units in electronics. If represented as letters within a mail network, \gls{vltg} is the number of letters each mail person carries, where \gls{crnt} is the rate of new batch deliveries. A component or drop-off point along the network has \gls{rstnc}, which is the number of letters they pick up from each mail person.
+Electronics involves a flow of electrons, for a transfer of energy over time (i.e. power). We represent this through \gls{vltg} and \gls{crnt}, seen as key units in electronics. If represented as letters within a mail network, \gls{vltg} is the number of letters each mail person carries, where \gls{crnt} is the rate of new batch deliveries. A component or drop-off point along the network has \gls{rstnc}, which is the ratio of letters they pick up from each mail person.
 
 From a physics standpoint, electronics work through transferring electrical energy, which goes through a conversion process in components. A \gls{rstnc} causes a heat conversion/heat loss. There is also \gls{cptnc} and \gls{idtnc}, discussed later on, due to conversion to electric and magnetic potential.
 
@@ -3030,7 +3030,7 @@ We also want to add a "Control" serial port, so the LINX block can find the Ardu
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap1}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Block Diagram Initial Setup}
 \end{figure}
 
 We know that the main function of the circuit is to charge and discharge a Capacitor reading its voltage, therefore you need a way of connecting to the capacitor, and then a way to read its voltage. We can use an "Analog Read" block for the voltage reading, and a "Digital Write" block for switching the capacitor.
@@ -3040,7 +3040,7 @@ In this case, their order shouldn't matter too much, but we will do reading firs
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap2}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Block Diagram Read and Write Blocks}
 \end{figure}
 
 Like before, the read and write functions can be found in "MakerHub", then LINX, then "Peripherals", then pick the correct section from there. Otherwise there is the search function, if you are struggling to find a block.
@@ -3050,7 +3050,7 @@ Now we have the blocks to make changes, we need to connect them witth the right 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap3}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Block Diagram Input Output Channels}
 \end{figure}
 
 Now the backend things have mostly been done, we should provde ways to interact. As stated, it is important to have a way to stop the program properly, so that the LINX stop function can correctly disconnect the Arduino. As stated before, we would want the while loop to stop if either that button is pressed, or if there is a LINX error. So we can use an OR gate, found within "Boolean". You should switch over to the front panel in order to add the stop button. This can be found under "Boolean". Upon switching back to the block view, this should now appear, so we can now connect these to the stop "Loop Condition". We should now have a block diagram and front panel which look like the below.
@@ -3058,13 +3058,13 @@ Now the backend things have mostly been done, we should provde ways to interact.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap4}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Block Diagram Error/Stop Handling}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap5}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Stop Button Front Panel}
 \end{figure}
 
 Now all that simply need to be added, is an output to view the voltage, and a switch to switch between charging and discharging the capacitor. We will add these from the front panel, and then connect them on the block diagram, keeping in mind that you can rename things. I have selected a voltage display from "Numeric", the "Numeric Indicator". Switching back to the block diagram, the switch can connect to the "Output Value" node of the "DO Channel" and the numeric indicator can connect to the "Voltage" node of the "Analog Read" block.
@@ -3072,13 +3072,13 @@ Now all that simply need to be added, is an output to view the voltage, and a sw
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap6}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Block Diagram Final}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{screenshots/labviewcap7}
-\caption{LabVIEW Capacitor Circuit Block Diagram}
+\caption{LabVIEW Capacitor Circuit Front Panel Final}
 \end{figure}
 
 This is quite a basic example, but allows you to see in reality how a capacitor charges and discharges. It could be a more advanced tool, which tries to predict its capacitance, if you know the resistor used.
@@ -3175,15 +3175,69 @@ We will start with a very basic example of turning the LED on and off, this time
 
 We will add the same indicator LED onto the front panel, as it is a useful way to ensure the LED is working as it should.
 
+The final layout looks like the below. As seen, shift registers are linked to the While structure.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{screenshots/labviewcaseled1}
+\caption{LabVIEW Case Based LED Final Block Diagram}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{screenshots/labviewcaseled2}
+\caption{LabVIEW Case Based LED Final Front Panel}
+\end{figure}
+
 Now this very basic form has been done, we will look at a State Machine example.
 
 State Machines are useful ways of organizing a several stage process, as when a certain event or condition is met, then the state can change, to allow for different processes to take place. This is useful for processes which have elements of linear flow to them.
 
-A solid way of doing this is by having a case structure inside an event structure, inside a while structure. Therefore, it will start on an event (the first state), and will continue to do so, until a certain case is met, at which point it will move to the next appropriate state.
+This again uses a similar system to above, where it stays on a certain case until criteria is met, which will change what case it is on. Within this main case, events could be used, triggered by a set action, rather than running as soon as the specific case is switched to, which in more complex systems can reduce the layout complexity.
 
-A case will run as long as its case is true, whereas with an events based system, you have a queue of events along with a timeout, which is the period of time of nothing happening for it to time out. Therefore there are cases where one might be more useful and others where the other is. Due to this, events are meant for shorter bits of code.
+A case will run as long as its case is true, whereas with an events based system, you have a queue of events along with a timeout, which is the period of time of nothing happening for it to time out. Therefore there are cases where one might be more useful and others where the other is. Due to this, events are meant for shorter pieces of code.
 
-The example state machine example will use events too, so you should know how to use a range of the main types within your programming.
+The example state machine example will use events too, so you should know how to use a range of the main types within your programming. In this example, there are several different states, from which different events can be triggered within, particularly useful for an experiment where at different stages processes need altering somewhat.
+
+As seen below, we have a similar case structure as before, where it is the second case structure used to pass the next state on. Then within the main case, we have an event structure, which means a set of events could trigger for a particular stage. The example in this case will be a basic representation of a several stage experiment. Imagine that it is an experiment to look at simulating air quality throughout a day, where each stage emulates a certain time of day, altering both the temperature and lighting conditions. Then within a time of day, there can be different chemicals released into this chamber, all of which is recorded throughout the experiment.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{screenshots/labviewstatemachine1}
+\caption{LabVIEW Case Based LED Final Front Panel}
+\end{figure}
+
+We want to cut down on the amount of blocks that have to be repeated, so some blocks will be placed in different sections, depending on whether they need to be used. So we need a heater and temperature sensor, an LED for lighting, gas measurement sensors and several distinct machanisms which releases gas. Most of these elements are used throughout, it is the conditions which change, which will be based upon user input. In this case we are going to use the "PWM" "Duty Cycle" block for the LED. As a reminder, PWM is where you can have the input turn on and off at a set percentage, given by the duty, allowing an LED to be dimmed. This means a single LED can emulate a range of lighting conditions! A digital write block is used for a heater like before, where the pin could be connected to a BJT transistor to power the heating element. We can assume a similar kind of trigger is used for the chemical release, for two seperate chemicals. This time, we have decided to use a digital temperature sensor. Luckily, LINX has a couple of examples, in this case we will use the "TCN75A" found within "MakerHub", then "LINX", then "Sensors", then "Temp", then "TCN75A". We will need both the Open and Read block, the first of which used in the initialization steps, and the second used every runthrough. We will assume that we are using two analogue gas sensors, which give a readable voltage, for two seperate gases.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{screenshots/labviewstatemachine2}
+\caption{LabVIEW Case Based LED Final Front Panel}
+\end{figure}
+
+Now the inital blocks have been placed, we think more about the structure. It is important to have some sort of structure together, before you start connecting blocks. We need to have the different time phases, which as an example, I will call these "Morning", "Midday", "Evening" and "Night". We can use the same process as earlier, where an "enum constant" is used for these four cases. Like before, we can make it a type def, and then open this, to create the four case names. This can then be saved, and we now have those 4 cases. Remember for the main case structure, we need to "Add case for every value". Within each of these, there needs to be the subcase, and the event structure.
+
+We should ensure this enum is passed through a shift register at the while loop, so the value can be passed for the next iteration, which wasn't initally done.
+
+We should now add in the user inputs that allow all of this to happen. There should be inputs for target temperatures, and lighting at each of the phases, as well as a button to switch phase, and buttons for the chemical release.
+The temperature inputs are "Numeric Inputs", the lighting has to be a duty cycle value, between 0 and 1, with 1 being on all the time, therefore we could use "Vertical Pointer Slides" found within "Numeric". These should have their scales altered to between 0 and 1 in properties.
+Then we can simply add in a time/ case switch button and chemical release buttons, using the "Ok Button" in "Boolean", which we can rename.
+
+Switching back to the block view, we need to place these, again within the while block, so they can be altered on the fly if needs be. It would be good to have an initial stage, where these values are set though, with a "Values ready" button. We will use this as a chance to go back into the type def, and add an additional value, called "Start".
+
+We can edit this, add the new case in and save it, ensuring to again do "Add case for every value" with the main case. We want it to start on this case, so we can switch to it then right click, and "Make This The Default Case".
+
+Ensure all the user input are in the main while loop, then we can add in a start button, specifically for the start stage, which connects to its subcase, to move to the morning phase.
+
+Now this has been done, we can start to move around everything else!
+
+First we will connect all the blocks together in the correct order. We will connect the Error Lines and LINX Resource lines, as well as connecting the channel nodes to control blocks, where you can select what pins of the Arduino to use. It would be awkward for the user to have to enter these every time they start the application, so we can instead use constants for these.
+
+For each time of day, the right temp and lighting input can go into it, and then connect to the output node of the case structure, to then connect to the blocks for the lighting and the heating.
+
+The value which is passed to the inputs of the blocks can be done through shift registers. There will be a comparison for the temperature, once the temperature sensor read block is connected.
+
+
 
 \textbf{LabVIEW Cheatsheet}
 
